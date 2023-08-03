@@ -2,13 +2,8 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.io.Serializable;
 @Data
 @Entity
 @NoArgsConstructor
@@ -26,9 +21,9 @@ public class PositionCustomerOrder  {
     private Boolean isAccepted;
 
     private Boolean isDelivered;
-
+    @JsonBackReference
     @ManyToOne
-@JsonBackReference
+    @JoinColumn(name = "customer_order_id",nullable = false)
     private CustomerOrder customerOrder;
 
 @ManyToOne

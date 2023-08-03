@@ -23,8 +23,8 @@ public class Address {
     private int numberOfPhone;
 
 
-
-@OneToMany(mappedBy = "address")
-private List<CustomerOrder> customerOrders;
+//
+//@OneToMany(mappedBy = "address")
+//private List<CustomerOrder> customerOrders;
 
 }

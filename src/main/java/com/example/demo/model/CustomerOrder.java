@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.aop.PointcutAdvisor;
-import org.springframework.jdbc.datasource.AbstractDriverBasedDataSource;
 
 import java.util.List;
 
@@ -20,20 +18,22 @@ public class CustomerOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
     //czy zamówienie jest w koszyku
-    private Boolean isCartShop;
+    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
+    private boolean isCartShop;
     //czy został sprzedany
-    private Boolean isSaled;
+    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
+    private boolean isSaled;
 
 
-    @OneToMany(mappedBy = "customerOrder")
     @JsonManagedReference
+    @OneToMany(mappedBy = "customerOrder")
     private List<PositionCustomerOrder> positionCustomerOrders;
 
 
 
 
-    @ManyToOne
-private Address address;
+//    @ManyToOne
+//private Address address;
 
 
 

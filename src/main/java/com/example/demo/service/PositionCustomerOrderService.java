@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.Repo.PositionCustomerOrderRepo;
-import com.example.demo.model.Address;
 import com.example.demo.model.PositionCustomerOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,9 @@ PositionCustomerOrderRepo positionCustomerOrderRepo;
     public List<PositionCustomerOrder> findByProductId (Long id){
         return positionCustomerOrderRepo.findByProduct_Id(id);
     }
-
+public List<PositionCustomerOrder> getByCustomerOrderId(Long id){
+        return positionCustomerOrderRepo.findByCustomerOrder_Id(id);
+}
 
 
 

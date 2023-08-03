@@ -1,7 +1,6 @@
 package com.example.demo.Controller;
 
 
-import com.example.demo.model.Address;
 import com.example.demo.model.PositionCustomerOrder;
 import com.example.demo.service.PositionCustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ PositionCustomerOrderService positionCustomerOrderService;
             newPco.setAmount(positionCustomerOrderEdit.getAmount());
         newPco.setIsAccepted(positionCustomerOrderEdit.getIsAccepted());
         newPco.setIsDelivered(positionCustomerOrderEdit.getIsDelivered());
-        newPco.setProduct(positionCustomerOrderEdit.getProduct());
+//        newPco.setProduct(positionCustomerOrderEdit.getProduct());
         newPco.setCustomerOrder(positionCustomerOrderEdit.getCustomerOrder());
 
             this.positionCustomerOrderService.add(newPco);
@@ -43,6 +42,11 @@ PositionCustomerOrderService positionCustomerOrderService;
 @GetMapping("/get_by_product_id/{id}")
     public Optional<List<PositionCustomerOrder>> getByProductId(@PathVariable("id") Long id){
         return Optional.ofNullable(positionCustomerOrderService.findByProductId(id));
+}
+
+@GetMapping("/get_by_pco/{id}")
+    public Optional<List<PositionCustomerOrder>>getByCustomerOrderId(@PathVariable("id")Long id){
+        return Optional.ofNullable(positionCustomerOrderService.getByCustomerOrderId(id));
 }
 }
 

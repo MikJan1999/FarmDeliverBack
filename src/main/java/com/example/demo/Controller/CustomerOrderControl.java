@@ -30,9 +30,9 @@ public class CustomerOrderControl {
         Optional<CustomerOrder> customerOrderOptional = this.customerOrderService.getById(id);
         if (customerOrderOptional.isPresent()) {
             CustomerOrder newCustomerAddress = customerOrderOptional.get();
-            newCustomerAddress.setIsCartShop(customerOrderEdit.getIsCartShop());
-            newCustomerAddress.setIsSaled(customerOrderEdit.getIsSaled());
-            newCustomerAddress.setAddress(customerOrderEdit.getAddress());
+            newCustomerAddress.setCartShop(customerOrderEdit.isCartShop());
+            newCustomerAddress.setSaled(customerOrderEdit.isSaled());
+//            newCustomerAddress.setAddress(customerOrderEdit.getAddress());
             this.customerOrderService.add(customerOrderEdit);
             return ResponseEntity.ok(customerOrderEdit);
         }

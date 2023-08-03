@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -26,31 +27,38 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull("Required product name")
-    private String productName;
+    private String productName ;
     private Double productPrice;
     private String productDescription;
     //Czy produkt jest na sprzedaż czy został wycofany
-@CreatedDate
-@Column(nullable = false,updatable = false)
-@Temporal(TemporalType.TIMESTAMP)
-private Date createdAt;
-@PrePersist
-protected void onCreate(){
-    createdAt = new Date();
-}
-@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-@JoinTable(name = "product_images",joinColumns = {
-        @JoinColumn(name = "product_id")},
-        inverseJoinColumns = {@JoinColumn(name = "image_id")
 
-})
-private Set<ImageData> productImage;
+    @UpdateTimestamp
+    @Column(nullable = false,updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
 
-@OneToMany(mappedBy = "product")
-@JsonManagedReference(value="product")
-    private List<PositionCustomerOrder> positionCustomerOrders;
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 
+
+//@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+
+
+//@JoinTable(name = "product_images",joinColumns = {
+//        @JoinColumn(name = "product_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "image_id")
+//
+//})
+//private Set<ImageData> productImage;
+
+
+//@OneToMany(mappedBy = "product")
+//@JsonManagedReference(value="product")
+//    private List<PositionCustomerOrder> positionCustomerOrders;
+//
 
 
 }
