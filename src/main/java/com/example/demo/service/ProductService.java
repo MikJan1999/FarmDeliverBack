@@ -2,12 +2,10 @@ package com.example.demo.service;
 
 
 import com.example.demo.Repo.ProductRepo;
-import com.example.demo.model.Address;
 import com.example.demo.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 import java.util.Optional;

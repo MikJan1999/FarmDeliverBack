@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.model.Address;
 import com.example.demo.model.GeneralAdvertisement;
 import com.example.demo.service.GeneralAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;

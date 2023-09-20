@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,24 +19,41 @@ public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
-    //czy zamówienie jest w koszyku
-    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
-    private boolean isCartShop;
-    //czy został sprzedany
-    @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
-    private boolean isSaled;
+
+    @Enumerated(EnumType.STRING)
+    private StatusOrder statusOrder;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCreateOrder;
+
+    private String description;
+    private Float priceOrder;
+
+//address
+    private String nameAndSurname;
+    private String street;
+    private String numberOfHouse;
+    private String village;
+    private int numberOfPhone;
 
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "customerOrder")
-    private List<PositionCustomerOrder> positionCustomerOrders;
 
 
+    @JsonManagedReference("position_order")
+    @OneToMany(mappedBy = "customerOrder",cascade = CascadeType.ALL)
+    private List<PositionCustomerOrder> positionCustomerOrdersss;
+
+    @JsonBackReference("users")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
-//    @ManyToOne
-//private Address address;
-
+    @PreUpdate
+    protected void onUpdate() {
+        dataCreateOrder = new Date();
+    }
 
 
 }

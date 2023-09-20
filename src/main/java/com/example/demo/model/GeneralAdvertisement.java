@@ -17,15 +17,6 @@ public class GeneralAdvertisement {
         private Long id;
         private String advertisement;
 
-//        @CreatedDate
-//        @Column(name = "dataOfAdding", nullable = false,updatable = false)
-//        @Temporal(TemporalType.TIMESTAMP)
-//        private Date dataOfAdding;
-//        @PrePersist
-//        protected void onCreate() {
-//                dataOfAdding = new Date();
-//
-//        }
 @UpdateTimestamp
 @Temporal(TemporalType.TIMESTAMP)
 private Date updatedAt;
