@@ -25,7 +25,6 @@ private GeneralAdvertisementService generalAdvertisementService;
         if(generalAdvertisementOptional.isPresent()){
             GeneralAdvertisement newGeneral = generalAdvertisementOptional.get();
             newGeneral.setAdvertisement(generalAdvertisement.getAdvertisement());
-//            newGeneral.setDataOfAdding(generalAdvertisement.getDataOfAdding());
             this.generalAdvertisementService.add(newGeneral);
             return ResponseEntity.ok(newGeneral);
         }

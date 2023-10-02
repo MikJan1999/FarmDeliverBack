@@ -10,8 +10,6 @@ import org.hibernate.annotations.Formula;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-
 public class PositionCustomerOrder  {
 
     @Id
@@ -19,10 +17,6 @@ public class PositionCustomerOrder  {
     private Long id;
     private float amount;
     private float priceAll;
-
-//    @Formula("(SELECT p.product_name FROM Product p WHERE p.id = product_id)")
-//    @Column
-//    private String productNameqqq;
 
     @JsonBackReference("position_order")
     @ManyToOne
@@ -36,13 +30,12 @@ public class PositionCustomerOrder  {
     private Product product;
 
 
+@ManyToOne
+@JsonBackReference("cartShop_position")
+private CartShop cartShop;
 
-    @ManyToOne
-    @JsonBackReference("cartShop_position")
-    private CartShop cartShop;
 
-
-    @Transient // Oznacza, że to pole nie jest mapowane do kolumny w bazie danych
-    private String productName;
+@Transient //nie mapuje
+private String productName;
 
 }

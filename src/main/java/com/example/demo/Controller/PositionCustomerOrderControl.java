@@ -137,46 +137,11 @@ return positionCustomerOrders;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     //wyświetla pozycje które należą do określonego koszyka
 @GetMapping("/get_all_by_cart_shop_id/{cartShopId}")
     public List<PositionCustomerOrder> getByCartShopId(@PathVariable Long cartShopId){
         return  positionCustomerOrderService.findPCOByCartShopId(cartShopId);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //użyłem do wyświetlenia listy pozycji po naciśnięciu zamówienia

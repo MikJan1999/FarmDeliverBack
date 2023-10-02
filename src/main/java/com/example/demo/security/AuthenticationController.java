@@ -1,6 +1,8 @@
 package com.example.demo.security;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,21 +28,6 @@ private final AuthenticaationService authenticaationService;
     {
 return ResponseEntity
         .ok(authenticaationService.authenticate(request));
-    }
-
-    @GetMapping("/dupa")
-    public ResponseEntity<String> getCurrentUser(Authentication authentication) {
-        if (authentication != null) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            System.out.println( userDetails.isAccountNonExpired() +"      "+"+Zalogowany użytkownik: " + userDetails.getUsername() + userDetails.getPassword());
-            return ResponseEntity.ok(userDetails.getUsername());
-        }
-
-        else {
-            System.out.println("Użytkownik nie jest zalogowany.");
-        }
-
-return null;
     }
 
     @GetMapping("/get-session")

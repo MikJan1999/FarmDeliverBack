@@ -43,25 +43,16 @@ public Optional<CartShop> findCartShopById(Long id){
 }
 
 public Optional<Product> findProductById(Long productId){return productRepo.findById(productId);}
-
     public List<Object[]> getAllWithProductName() {
-        return positionCustomerOrderRepo.getAllPositionCustomerOrdersWithProductName();
-    }
-
+        return positionCustomerOrderRepo.getAllPositionCustomerOrdersWithProductName();}
     public List<Object[]> getAllWithProductNameByOrderId(Long customer_order_id) {
-        return positionCustomerOrderRepo.getAllPositionCustomerOrdersWithProductNameByOrderId(customer_order_id);
-    }
-
+        return positionCustomerOrderRepo.getAllPositionCustomerOrdersWithProductNameByOrderId(customer_order_id);}
     public PositionCustomerOrderWithProductNameDTO getPositionCustomerOrderWithProductName(Long positionId) {
         PositionCustomerOrder positionCustomerOrder = positionCustomerOrderRepo.findById(positionId).orElse(null);
-
         if (positionCustomerOrder == null) {
-            return null; // Obsłuż przypadek, gdy nie znaleziono pozycji zamówienia.
-        }
-
+            return null;}
         PositionCustomerOrderWithProductNameDTO dto = new PositionCustomerOrderWithProductNameDTO(positionCustomerOrder);
-        return dto;
-    }
+        return dto;}
     public PositionCustomerOrder getPositionCustomerOrderById(Long positionId) {
         return positionCustomerOrderRepo.findById(positionId).orElse(null);
     }

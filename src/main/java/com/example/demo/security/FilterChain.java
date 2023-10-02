@@ -9,6 +9,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 @Configuration
@@ -19,6 +21,11 @@ public class FilterChain {
    private final AuthenticationProvider authenticationProvider;
    private final UserDetailsService userDetailsService;
 
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+
+        return new HttpStatusReturningLogoutSuccessHandler();
+    }
 
    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -27,7 +34,7 @@ public class FilterChain {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/**")
+                .requestMatchers("/login/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -37,7 +44,12 @@ public class FilterChain {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthfilter,
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .logout()
+               .logoutUrl("/login/logout") // Definiujemy URL wylogowania
+               .logoutSuccessHandler(logoutSuccessHandler()) // Ustawiamy obsługę wylogowania
+               .invalidateHttpSession(true) // Unieważniamy sesję HTTP
+               .deleteCookies("JSESSIONID"); // Usuwamy ciasteczka, jeśli są używan
         return httpSecurity.build();
     }
 

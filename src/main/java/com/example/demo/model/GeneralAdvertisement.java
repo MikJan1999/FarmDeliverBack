@@ -12,18 +12,19 @@ import java.util.Date;
 @NoArgsConstructor
 public class GeneralAdvertisement {
 
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
+
         private String advertisement;
 
 @UpdateTimestamp
 @Temporal(TemporalType.TIMESTAMP)
 private Date updatedAt;
 
-
-        @PreUpdate
-        protected void onUpdate() {
+@PreUpdate
+protected void onUpdate() {
                 updatedAt = new Date();
         }
 }

@@ -2,6 +2,7 @@ package com.example.demo.security;
 import com.example.demo.Repo.UserRepo;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -57,4 +58,7 @@ private final AuthenticationManager authenticationManager;
                 .role(Role.valueOf(roleuser))
                 .id(idUser)
                 .build();
-    }}
+    }
+
+
+   }

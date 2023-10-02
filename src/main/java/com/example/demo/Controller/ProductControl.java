@@ -25,6 +25,7 @@ public class ProductControl {
     @GetMapping("/get/{id}") public Optional<Product> getById(@PathVariable("id") Long id){ return productService.getById(id);}
     @DeleteMapping("/delete/{id}") public void deleteById(@PathVariable("id") Long id) { productService.deleteById(id);}
 
+
     @PutMapping("/edit/{id}")
     public @ResponseBody ResponseEntity<Product> editById(@PathVariable("id") Long id, @RequestBody Product productEdit) throws NameNotFoundException {
         Optional<Product> productOptional = this.productService.getById(id);

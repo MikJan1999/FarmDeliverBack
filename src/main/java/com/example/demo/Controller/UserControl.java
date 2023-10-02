@@ -3,9 +3,12 @@ package com.example.demo.Controller;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 import javax.naming.NameNotFoundException;
 import java.util.List;
@@ -18,9 +21,10 @@ public class UserControl {
     UserService userService;
 
     @PostMapping("/add")
-    public User add(@RequestBody User user) {
+    public User add(@RequestBody  User user) {
         System.out.println(user.getRole());
         return  userService.add(user);}
+
     @GetMapping("/get") public List<User> getAll(){ return  userService.getAll();}
     @GetMapping("/get/{id}") public Optional<User> getById(@PathVariable("id") Long id){ return userService.getById(id);}
     @DeleteMapping("/delete/{id}") public void deleteById(@PathVariable("id") Long id) { userService.deleteById(id);}

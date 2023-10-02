@@ -20,29 +20,16 @@ public class CustomerOrderService {
     @Autowired
     PositionCustomerOrderRepo positionCustomerOrders;
 
-    public CustomerOrder add(@RequestBody CustomerOrder customerOrder) {
-        return customerOrderRepo.save(customerOrder);
-    }
-
-    public List<CustomerOrder> getAll() {
-        return customerOrderRepo.findAll();
-    }
-
-    public Optional<CustomerOrder> getById(Long id) {
-        return customerOrderRepo.findById(id);
-    }
-
-    public void deleteById(Long id) {
-        customerOrderRepo.deleteById(id);
-    }
-
-
+    public CustomerOrder add(@RequestBody CustomerOrder customerOrder) {return customerOrderRepo.save(customerOrder);}
+    public List<CustomerOrder> getAll() {return customerOrderRepo.findAll();}
+    public Optional<CustomerOrder> getById(Long id) {return customerOrderRepo.findById(id);}
+    public void deleteById(Long id) {customerOrderRepo.deleteById(id);}
     public CustomerOrder addProductToOrder(PositionCustomerOrder positionCustomerOrder, CustomerOrder customerOrder) {
         customerOrder.getPositionCustomerOrdersss().add(positionCustomerOrder);
-        return customerOrder;
-    }
+        return customerOrder;}
 
     public List<CustomerOrder> findByUserId(Long userId){
         return customerOrderRepo.findByUserId(userId);
     }
+
 }

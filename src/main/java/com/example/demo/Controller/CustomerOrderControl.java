@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.model.CustomerOrder;
 import com.example.demo.model.PositionCustomerOrder;
+import com.example.demo.model.StatusOrder;
 import com.example.demo.security.JWTService;
 import com.example.demo.service.CustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,17 @@ public class CustomerOrderControl {
     ResponseEntity<CustomerOrder> editById(@PathVariable("id") Long id, @RequestBody CustomerOrder customerOrderEdit) throws NameNotFoundException {
         Optional<CustomerOrder> customerOrderOptional = this.customerOrderService.getById(id);
         if (customerOrderOptional.isPresent()) {
-            CustomerOrder newCustomerAddress = customerOrderOptional.get();
-//            newCustomerAddress.setAddress(customerOrderEdit.getAddress());
-            this.customerOrderService.add(customerOrderEdit);
+            CustomerOrder newCustomerEdit = customerOrderOptional.get();
+            newCustomerEdit.setStatusOrder(customerOrderEdit.getStatusOrder());
+            newCustomerEdit.setUser(customerOrderEdit.getUser());
+            newCustomerEdit.setDescription(customerOrderEdit.getDescription());
+            newCustomerEdit.setNameAndSurname(customerOrderEdit.getNameAndSurname());
+            newCustomerEdit.setNumberOfHouse(customerOrderEdit.getNumberOfHouse());
+            newCustomerEdit.setNumberOfPhone(customerOrderEdit.getNumberOfPhone());
+            newCustomerEdit.setStreet(customerOrderEdit.getStreet());
+            newCustomerEdit.setVillage(customerOrderEdit.getVillage());
+            newCustomerEdit.setPriceOrder(customerOrderEdit.getPriceOrder());
+            this.customerOrderService.add(newCustomerEdit);
             return ResponseEntity.ok(customerOrderEdit);
         }
         throw new NameNotFoundException("Nie znaleziono z tym id:" + id);

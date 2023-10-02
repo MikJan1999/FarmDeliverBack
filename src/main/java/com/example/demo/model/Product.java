@@ -37,7 +37,6 @@ public class Product implements Serializable {
     @UpdateTimestamp
     @Column(nullable = false,updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM d, yyyy hh:mm:ss a", locale = "en_US")
     private Date updatedAt;
 
     @PreUpdate
